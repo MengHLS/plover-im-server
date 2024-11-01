@@ -255,12 +255,12 @@ public class VelocityUtils
         }
         for (GenTableColumn column : columns)
         {
-            if (!column.isSuperColumn() && GenConstants.TYPE_DATE.equals(column.getJavaType()))
+            if (column.isSuperColumn() && GenConstants.TYPE_DATE.equals(column.getJavaType()))
             {
                 importList.add("java.util.Date");
                 importList.add("com.fasterxml.jackson.annotation.JsonFormat");
             }
-            else if (!column.isSuperColumn() && GenConstants.TYPE_BIGDECIMAL.equals(column.getJavaType()))
+            else if (column.isSuperColumn() && GenConstants.TYPE_BIGDECIMAL.equals(column.getJavaType()))
             {
                 importList.add("java.math.BigDecimal");
             }
@@ -297,7 +297,7 @@ public class VelocityUtils
     {
         for (GenTableColumn column : columns)
         {
-            if (!column.isSuperColumn() && StringUtils.isNotEmpty(column.getDictType()) && StringUtils.equalsAny(
+            if (column.isSuperColumn() && StringUtils.isNotEmpty(column.getDictType()) && StringUtils.equalsAny(
                     column.getHtmlType(),
                     new String[] { GenConstants.HTML_SELECT, GenConstants.HTML_RADIO, GenConstants.HTML_CHECKBOX }))
             {
