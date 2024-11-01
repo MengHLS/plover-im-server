@@ -1,9 +1,11 @@
 package com.ruoyi.gen.domain;
 
-import javax.validation.constraints.NotBlank;
 
 import com.ruoyi.common.core.utils.StringUtils;
 import com.ruoyi.common.core.web.domain.BaseEntity;
+import jakarta.validation.constraints.NotBlank;
+
+import java.io.Serial;
 
 /**
  * 代码生成业务字段表 gen_table_column
@@ -12,6 +14,7 @@ import com.ruoyi.common.core.web.domain.BaseEntity;
  */
 public class GenTableColumn extends BaseEntity
 {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /** 编号 */
@@ -326,7 +329,7 @@ public class GenTableColumn extends BaseEntity
 
     public boolean isSuperColumn()
     {
-        return isSuperColumn(this.javaField);
+        return !isSuperColumn(this.javaField);
     }
 
     public static boolean isSuperColumn(String javaField)
@@ -361,7 +364,7 @@ public class GenTableColumn extends BaseEntity
                 {
                     Object startStr = value.subSequence(0, 1);
                     String endStr = value.substring(1);
-                    sb.append("").append(startStr).append("=").append(endStr).append(",");
+                    sb.append(startStr).append("=").append(endStr).append(",");
                 }
             }
             return sb.deleteCharAt(sb.length() - 1).toString();

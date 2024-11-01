@@ -3,11 +3,12 @@ package com.ruoyi.common.core.web.controller;
 import java.beans.PropertyEditorSupport;
 import java.util.Date;
 import java.util.List;
+
+import com.ruoyi.common.core.context.PageInfoContextHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import com.github.pagehelper.PageInfo;
 import com.ruoyi.common.core.constant.HttpStatus;
 import com.ruoyi.common.core.utils.DateUtils;
 import com.ruoyi.common.core.utils.PageUtils;
@@ -45,7 +46,7 @@ public class BaseController
      */
     protected void startPage()
     {
-        PageUtils.startPage();
+        PageInfoContextHolder.setPage(PageUtils.startPage());
     }
 
     /**
@@ -53,7 +54,7 @@ public class BaseController
      */
     protected void clearPage()
     {
-        PageUtils.clearPage();
+        PageInfoContextHolder.setPage(null);
     }
 
     /**
@@ -66,7 +67,7 @@ public class BaseController
         rspData.setCode(HttpStatus.SUCCESS);
         rspData.setRows(list);
         rspData.setMsg("查询成功");
-        rspData.setTotal(new PageInfo(list).getTotal());
+        rspData.setTotal(PageInfoContextHolder.getPage().getTotal());
         return rspData;
     }
 

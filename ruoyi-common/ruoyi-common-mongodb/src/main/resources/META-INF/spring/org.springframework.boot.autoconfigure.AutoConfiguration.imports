@@ -1,0 +1,2 @@
+com.ruoyi.common.mongodb.configure.MongoConfig
+com.ruoyi.common.mongodb.service.MongoService

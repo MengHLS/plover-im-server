@@ -1,10 +1,11 @@
 package com.ruoyi.system.domain;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.core.web.domain.BaseEntity;
@@ -16,6 +17,7 @@ import com.ruoyi.common.core.web.domain.BaseEntity;
  */
 public class SysMenu extends BaseEntity
 {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /** 菜单ID */
@@ -67,7 +69,7 @@ public class SysMenu extends BaseEntity
     private String icon;
 
     /** 子菜单 */
-    private List<SysMenu> children = new ArrayList<SysMenu>();
+    private List<SysMenu> children = new ArrayList<>();
 
     public Long getMenuId()
     {
@@ -80,7 +82,7 @@ public class SysMenu extends BaseEntity
     }
 
     @NotBlank(message = "菜单名称不能为空")
-    @Size(min = 0, max = 50, message = "菜单名称长度不能超过50个字符")
+    @Size(max = 50, message = "菜单名称长度不能超过50个字符")
     public String getMenuName()
     {
         return menuName;
@@ -215,7 +217,7 @@ public class SysMenu extends BaseEntity
         this.status = status;
     }
 
-    @Size(min = 0, max = 100, message = "权限标识长度不能超过100个字符")
+    @Size(max = 100, message = "权限标识长度不能超过100个字符")
     public String getPerms()
     {
         return perms;

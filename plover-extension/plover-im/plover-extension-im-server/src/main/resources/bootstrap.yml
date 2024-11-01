@@ -1,0 +1,31 @@
+server:
+  port: ${random.int(10000,20000)}
+
+spring:
+  profiles:
+    active: dev
+  application:
+    # 应用名称
+    name: im-server
+  cloud:
+    nacos:
+      discovery:
+        # 服务注册地址
+        server-addr: 192.168.24.129:18848
+      config:
+        # 配置中心地址
+        server-addr: 192.168.24.129:18848
+        # 配置文件格式
+        file-extension: yml
+        # 共享配置
+        shared-configs:
+          - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+plover:
+  im:
+    ip: 127.0.0.1 #本地IP地址（非必填，不填时自动获取本机ip地址，但多网卡的机器可能会获取到错误的ip）
+    ws:
+      port: 8082
+      enable: true
+    tcp:
+      port: 8083
+      enable: true

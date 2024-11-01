@@ -1,0 +1,7 @@
+com.plover.extension.im.connector.remote.IMServerGroup
+com.plover.extension.im.connector.remote.netty.ws.WebSocketServer
+com.plover.extension.im.connector.remote.netty.tcp.TcpSocketServer
+com.plover.extension.im.connector.configure.IMServerConfigProperties
+com.plover.extension.im.connector.processor.HearthBeatProcessor
+com.plover.extension.im.connector.processor.LoginProcessor
+

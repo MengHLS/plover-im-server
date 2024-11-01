@@ -12,6 +12,7 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * spring redis 工具类
@@ -264,5 +265,15 @@ public class RedisService
     public Collection<String> keys(final String pattern)
     {
         return redisTemplate.keys(pattern);
+    }
+
+    /**
+     *
+     * @param key Redis键
+     * @return 自增值
+     */
+    public Long increment(String key) {
+        Assert.notNull(key, "The key must not be null!");
+        return redisTemplate.opsForValue().increment(key);
     }
 }

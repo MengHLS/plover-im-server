@@ -7,6 +7,11 @@ import com.ruoyi.common.core.text.Convert;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
 /**
  * Jwt工具类
@@ -25,8 +30,8 @@ public class JwtUtils
      */
     public static String createToken(Map<String, Object> claims)
     {
-        String token = Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.HS512, secret).compact();
-        return token;
+        SecretKey key = new SecretKeySpec(Decoders.BASE64.decode(secret), SignatureAlgorithm.HS512.getJcaName());
+        return Jwts.builder().claims(claims).signWith(key,Jwts.SIG.HS512).compact();
     }
 
     /**
@@ -37,7 +42,8 @@ public class JwtUtils
      */
     public static Claims parseToken(String token)
     {
-        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+
+        return Jwts.parser().verifyWith(Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret))).build().parseSignedClaims(token).getPayload();
     }
 
     /**

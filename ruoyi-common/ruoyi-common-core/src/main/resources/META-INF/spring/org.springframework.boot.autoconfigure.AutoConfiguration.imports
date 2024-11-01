@@ -1,1 +1,3 @@
 com.ruoyi.common.core.utils.SpringUtils
+com.ruoyi.common.core.utils.SpringContextHolder
+com.ruoyi.common.core.configure.MybatisPlusConfig

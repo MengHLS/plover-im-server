@@ -40,14 +40,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-		
-        <!-- Swagger UI -->
+
+        <!-- SpringDoc -->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>${swagger.fox.version}</version>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${SpringDoc.version}</version>
         </dependency>
-		
         <!-- Quartz -->
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
