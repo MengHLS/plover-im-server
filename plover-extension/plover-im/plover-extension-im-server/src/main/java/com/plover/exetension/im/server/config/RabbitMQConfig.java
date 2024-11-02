@@ -1,6 +1,7 @@
 package com.plover.exetension.im.server.config;
 
 import com.plover.exetension.im.server.service.MessageStorageService;
+import com.plover.extension.im.core.constant.MQConstant;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
@@ -18,7 +19,7 @@ public class RabbitMQConfig {
 
     @Bean
     public Queue storageQueue() {
-        return new Queue("StorageQueue");
+        return new Queue(MQConstant.MQ_STORAGE_QUEUE_NAME);
     }
 
     @Bean

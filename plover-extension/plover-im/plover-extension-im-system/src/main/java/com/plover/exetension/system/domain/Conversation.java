@@ -1,8 +1,11 @@
 package com.plover.exetension.system.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import com.plover.extension.im.core.model.BaseMessage;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.repository.query.Param;
 
 /**
  * @description:
@@ -12,31 +15,24 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class Conversation {
+@Document
+@NoArgsConstructor
+@AllArgsConstructor
+public class Conversation extends BaseMessage {
 
 
     /**
-     * 群组id
+     * 会话Id
      */
-    private String roomId;
+    private String conversationId;
 
     /**
-     * 用户id
+     * 会话名称
      */
-    private String userId;
+    private String name;
 
     /**
-     * 群组信息
+     * 会话类型
      */
-    private Group group;
-
-    /**
-     * 好友信息
-     */
-    private Friend friend;
-
-    /**
-     * 消息
-     */
-    private Message message;
+    private int conversationType;
 }

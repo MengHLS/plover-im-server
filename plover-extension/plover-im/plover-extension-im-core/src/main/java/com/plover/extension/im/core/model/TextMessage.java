@@ -1,6 +1,8 @@
 package com.plover.extension.im.core.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 /**
  * @description: 文本消息

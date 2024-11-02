@@ -29,8 +29,10 @@ public class PageUtils
         Integer pageNum = pageDomain.getPageNum();
         Integer pageSize = pageDomain.getPageSize();
         OrderItem orderItem = new OrderItem();
-        orderItem.setColumn(ServletUtils.getParameter(ORDER_BY_COLUMN));
-        orderItem.setAsc(getIsAsc(ServletUtils.getParameter(IS_ASC)));
+        if (ServletUtils.getParameter(ORDER_BY_COLUMN) != null){
+            orderItem.setColumn(ServletUtils.getParameter(ORDER_BY_COLUMN));
+            orderItem.setAsc(getIsAsc(ServletUtils.getParameter(IS_ASC)));
+        }
         List<OrderItem> list = new ArrayList<>();
         list.add(orderItem);
         page.setCurrent(pageNum).setSize(pageSize).setOrders(list);

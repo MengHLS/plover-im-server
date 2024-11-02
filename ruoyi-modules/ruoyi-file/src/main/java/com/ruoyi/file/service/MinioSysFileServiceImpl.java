@@ -2,7 +2,9 @@ package com.ruoyi.file.service;
 
 import java.io.InputStream;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import com.alibaba.nacos.common.utils.IoUtils;
 import com.ruoyi.file.config.MinioConfig;
@@ -15,6 +17,7 @@ import io.minio.PutObjectArgs;
  *
  * @author ruoyi
  */
+@Primary
 @Service
 public class MinioSysFileServiceImpl implements ISysFileService
 {
@@ -32,7 +35,7 @@ public class MinioSysFileServiceImpl implements ISysFileService
      * @throws Exception
      */
     @Override
-    public String uploadFile(MultipartFile file) throws Exception
+    public String uploadFile(@RequestPart("file") MultipartFile file) throws Exception
     {
         String fileName = FileUploadUtils.extractFilename(file);
         InputStream inputStream = file.getInputStream();

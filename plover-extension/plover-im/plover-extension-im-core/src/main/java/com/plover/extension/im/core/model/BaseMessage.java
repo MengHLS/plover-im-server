@@ -1,7 +1,8 @@
 package com.plover.extension.im.core.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import java.lang.annotation.Documented;
 
 /**
  * @description: 基础消息bean
@@ -10,6 +11,8 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class BaseMessage {
 
     /**
@@ -33,6 +36,11 @@ public class BaseMessage {
     private String senderId;
 
     /**
+     * 发送者名称
+     */
+    private String senderName;
+
+    /**
      * 发送者类型
      */
     private int senderType;
@@ -41,6 +49,11 @@ public class BaseMessage {
      * 接收者id
      */
     private String receiverId;
+
+    /**
+     * 接受者名称
+     */
+    private String receiverName;
 
     /**
      * 接受者类型

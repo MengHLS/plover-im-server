@@ -180,6 +180,20 @@ public class SysUserController extends BaseController
     }
 
     /**
+     * 获取用户信息
+     *
+     * @return 用户信息
+     */
+    @GetMapping("/info/base/{userId}")
+    public AjaxResult getBaseInfo(@PathVariable(value = "userId") Long userId)
+    {
+        SysUser user = userService.selectUserById(userId);
+        AjaxResult ajax = AjaxResult.success();
+        ajax.put("user", user);
+        return ajax;
+    }
+
+    /**
      * 根据用户编号获取详细信息
      */
     @RequiresPermissions("system:user:query")
