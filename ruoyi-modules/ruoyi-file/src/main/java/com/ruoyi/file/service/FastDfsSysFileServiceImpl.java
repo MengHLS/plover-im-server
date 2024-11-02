@@ -3,9 +3,7 @@ package com.ruoyi.file.service;
 import java.io.InputStream;
 import com.alibaba.nacos.common.utils.IoUtils;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
@@ -33,7 +31,7 @@ public class FastDfsSysFileServiceImpl implements ISysFileService
      *
      * @param file 上传的文件
      * @return 访问地址
-     * @throws Exception
+     * @throws Exception 异常
      */
     @Override
     public String uploadFile(MultipartFile file) throws Exception

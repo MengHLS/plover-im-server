@@ -32,7 +32,7 @@ public class MinioSysFileServiceImpl implements ISysFileService
      *
      * @param file 上传的文件
      * @return 访问地址
-     * @throws Exception
+     * @throws Exception 异常
      */
     @Override
     public String uploadFile(@RequestPart("file") MultipartFile file) throws Exception

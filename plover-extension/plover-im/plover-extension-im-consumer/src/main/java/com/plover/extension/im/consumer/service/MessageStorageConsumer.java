@@ -24,7 +24,7 @@ public class MessageStorageConsumer {
 
 
     @RabbitHandler
-    public void receiveMessage(BaseMessage message) throws IOException {
+    public void receiveMessage(BaseMessage message) {
 
         mongoService.insert(message, MongoConstant.MESSAGE_STORAGE_CONNECTION_NAME);
         mongoService.insert(message,MongoConstant.OFFLINE_MESSAGE_STORAGE_CONNECTION_NAME);

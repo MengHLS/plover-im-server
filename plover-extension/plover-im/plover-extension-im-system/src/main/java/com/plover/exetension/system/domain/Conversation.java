@@ -2,10 +2,7 @@ package com.plover.exetension.system.domain;
 
 import com.plover.extension.im.core.model.BaseMessage;
 import lombok.*;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.repository.query.Param;
 
 /**
  * @description:

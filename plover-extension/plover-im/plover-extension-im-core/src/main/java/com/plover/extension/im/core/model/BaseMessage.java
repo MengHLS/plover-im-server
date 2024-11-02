@@ -2,8 +2,6 @@ package com.plover.extension.im.core.model;
 
 import lombok.*;
 
-import java.lang.annotation.Documented;
-
 /**
  * @description: 基础消息bean
  * @author: plover

@@ -1,7 +1,6 @@
 package com.ruoyi.file.service;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.ruoyi.file.utils.FileUploadUtils;
@@ -37,13 +36,12 @@ public class LocalSysFileServiceImpl implements ISysFileService
      * 
      * @param file 上传的文件
      * @return 访问地址
-     * @throws Exception
+     * @throws Exception 异常
      */
     @Override
     public String uploadFile(MultipartFile file) throws Exception
     {
         String name = FileUploadUtils.upload(localFilePath, file);
-        String url = domain + localFilePrefix + name;
-        return url;
+        return domain + localFilePrefix + name;
     }
 }
