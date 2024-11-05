@@ -64,11 +64,6 @@ public class TcpSocketServer extends AbstractRemoteServer {
             Channel channel = bootstrap.bind(port).sync().channel();
             // 就绪标志
             ready = true;
-            SpringContextHolder.sendEvent(NodeRegisterEvent.builder()
-                    .netProtocolEnum(NetProtocolEnum.TCP)
-                    .port(port)
-                    .registerTime(System.currentTimeMillis())
-                    .build());
             log.info("tcp server 初始化完成,端口：{}", port);
         } catch (InterruptedException e) {
             log.error("tcp server 初始化异常", e);

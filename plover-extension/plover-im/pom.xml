@@ -24,6 +24,7 @@
         <module>plover-extension-im-consumer</module>
         <module>plover-extension-im-server</module>
         <module>plover-extension-im-system</module>
+        <module>plover-extension-im-cluster</module>
     </modules>
 
 </project>

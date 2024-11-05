@@ -64,11 +64,6 @@ public class WebSocketServer extends AbstractRemoteServer {
             Channel channel = bootstrap.bind(port).sync().channel();
             // 就绪标志
             this.ready = true;
-            SpringContextHolder.sendEvent(NodeRegisterEvent.builder()
-                    .netProtocolEnum(NetProtocolEnum.WS)
-                    .port(port)
-                    .registerTime(System.currentTimeMillis())
-                    .build());
             log.info("websocket server 初始化完成,端口：{}", port);
         } catch (InterruptedException e) {
             log.error("websocket server 初始化异常", e);

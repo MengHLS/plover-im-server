@@ -12,6 +12,8 @@ spring:
       discovery:
         # 服务注册地址
         server-addr: 192.168.24.129:18848
+        metadata:
+          service-id: ${random.uuid}
       config:
         # 配置中心地址
         server-addr: 192.168.24.129:18848
@@ -29,3 +31,6 @@ plover:
     tcp:
       port: 8083
       enable: true
+    cluster:
+      enabled: true
+      service-id: ${random.enabled}
