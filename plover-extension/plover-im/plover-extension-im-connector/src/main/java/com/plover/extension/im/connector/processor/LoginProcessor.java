@@ -1,13 +1,17 @@
 package com.plover.extension.im.connector.processor;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.json.JSONUtil;
+import com.plover.extension.im.connector.configure.IMServerConfigProperties;
 import com.plover.extension.im.connector.listener.event.UserEvent;
 import com.plover.extension.im.connector.remote.netty.UserChannelCtxMap;
+import com.plover.extension.im.connector.service.UserOnlineService;
 import com.plover.extension.im.core.constant.ConnectorConst;
 import com.plover.extension.im.core.enums.IMActionType;
 import com.plover.extension.im.core.model.LoginInfo;
 import com.plover.extension.im.core.model.MessageDTO;
 import com.plover.extension.im.connector.utils.SendMessageUtils;
+import com.plover.extension.im.core.model.UserOnlineInfo;
 import com.ruoyi.common.core.constant.CacheConstants;
 import com.ruoyi.common.core.utils.JwtUtils;
 import com.ruoyi.common.core.utils.SpringContextHolder;
@@ -16,6 +20,7 @@ import com.ruoyi.common.redis.service.RedisService;
 import io.jsonwebtoken.Claims;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.AttributeKey;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,6 +37,11 @@ public class LoginProcessor implements MessageProcessor {
 
     @Autowired
     private RedisService redisService;
+
+    @Resource
+    private UserOnlineService userOnlineService;
+    @Resource
+    private IMServerConfigProperties imServerConfigProperties;
 
     @Override
     public void process(ChannelHandlerContext ctx, Object data) {
@@ -65,6 +75,8 @@ public class LoginProcessor implements MessageProcessor {
 
             // 不允许多地登录,强制下线
             SendMessageUtils.send(context, MessageDTO.builder().action(IMActionType.FORCE_LOGOUT.code()).data("强制下线").build());
+            userOnlineService.userOffline(userId+ "_" + loginInfo.getDeviceType());
+
             SendMessageUtils.close(context);
         }
 
@@ -76,6 +88,15 @@ public class LoginProcessor implements MessageProcessor {
         ctx.channel().attr(AttributeKey.valueOf(ConnectorConst.HEARTBEAT_TIMES)).set(0L);
         SpringContextHolder.sendEvent(UserEvent.buildOnlineEvent(userId, ctx));
         log.info("用户{}已登录", JwtUtils.getUserName(loginInfo.getToken()));
+
+        UserOnlineInfo userOnlineInfo = UserOnlineInfo.builder().userId(userId)
+                .onlineTime(DateUtil.current())
+                .userName(username)
+                .serviceId(imServerConfigProperties.getServiceId())
+                .deviceType(loginInfo.getDeviceType())
+                .build();
+
+        userOnlineService.userOnline(userOnlineInfo);
 
         SendMessageUtils.send(ctx, MessageDTO.builder().action(IMActionType.LOGIN_SUCCESS.code()).data("登陆成功").build());
 

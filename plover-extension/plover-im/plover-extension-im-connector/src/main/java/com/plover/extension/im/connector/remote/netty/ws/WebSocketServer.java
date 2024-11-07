@@ -1,13 +1,10 @@
 package com.plover.extension.im.connector.remote.netty.ws;
 
 import com.plover.extension.im.connector.configure.IMServerConfigProperties;
-import com.plover.extension.im.connector.listener.event.NodeRegisterEvent;
 import com.plover.extension.im.connector.remote.netty.AbstractRemoteServer;
 import com.plover.extension.im.connector.remote.netty.factory.NettyEventLoopFactory;
 import com.plover.extension.im.connector.remote.netty.ws.coder.MessageProtocolDecoder;
 import com.plover.extension.im.connector.remote.netty.ws.coder.MessageProtocolEncoder;
-import com.plover.extension.im.core.enums.NetProtocolEnum;
-import com.ruoyi.common.core.utils.SpringContextHolder;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;

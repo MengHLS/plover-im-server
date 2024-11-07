@@ -276,4 +276,14 @@ public class RedisService
         Assert.notNull(key, "The key must not be null!");
         return redisTemplate.opsForValue().increment(key);
     }
+
+    /**
+     * 向频道发送消息
+     * @param channel 频道名称
+     * @param message 消息
+     * @return the number of clients that received the message or null when used in pipeline / transaction.
+     */
+    public Long convertAndSend( String channel, Object message){
+       return redisTemplate.convertAndSend(channel, message);
+    }
 }

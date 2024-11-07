@@ -26,6 +26,8 @@ public class IMServerConfigProperties {
 
     private TcpNode tcp;
 
+    private String serviceId;
+
     @Setter
     @Getter
     public static class TcpNode {

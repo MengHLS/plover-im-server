@@ -7,11 +7,13 @@ import com.plover.exetension.im.server.service.ForwardMessageService;
 import com.plover.exetension.im.server.service.MessageStorageService;
 import com.plover.extension.im.connector.processor.MessageProcessor;
 import com.plover.extension.im.connector.processor.Processor;
+import com.plover.extension.im.connector.service.UserOnlineService;
 import com.plover.extension.im.connector.utils.SendMessageUtils;
 import com.plover.extension.im.core.enums.IMActionType;
 import com.plover.extension.im.core.model.BaseMessage;
 import com.plover.extension.im.core.model.MessageDTO;
 import io.netty.channel.ChannelHandlerContext;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,6 +33,9 @@ public class PrivateMessageProcessor implements MessageProcessor {
 
     @Autowired
     private ForwardMessageService forwardMessageService;
+
+    @Resource
+    private UserOnlineService userOnlineService;
     /**
      * 单聊消息处理
      * @param ctx
@@ -61,6 +66,9 @@ public class PrivateMessageProcessor implements MessageProcessor {
      * @param baseMessage 消息
      */
     private void sendToReceiver(BaseMessage baseMessage) {
+        if (!userOnlineService.isUserOnline(baseMessage.getReceiverId())){
+            return;
+        }
         MessageDTO<Object> messageDTO = new MessageDTO<>();
         messageDTO.setAction(IMActionType.PRIVATE_MESSAGE.getCode());
         messageDTO.setData(baseMessage);

@@ -21,7 +21,7 @@ public class IMServerGroup implements CommandLineRunner {
     public List<IMServer> imServers;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         // 初始化SERVER_ID
         serverId = redisService.increment(RedisKey.IM_MAX_SERVER_ID);
         for (IMServer imServer : imServers) {
